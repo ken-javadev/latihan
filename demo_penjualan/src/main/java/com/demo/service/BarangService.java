@@ -4,12 +4,13 @@ import com.demo.bean.BarangEntity;
 import com.demo.common.AdvanceSearch;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public interface BarangService {
     public List<BarangEntity> findAll();
     public List<BarangEntity> findAllPagging(AdvanceSearch params);
-    public Long findAllPaggingCount(AdvanceSearch params);
+    public BigInteger findAllPaggingCount(AdvanceSearch params);
     public BarangEntity findOne(Integer idBarang);
     public void save(BarangEntity barang);
     public void delete(Integer idBarang);

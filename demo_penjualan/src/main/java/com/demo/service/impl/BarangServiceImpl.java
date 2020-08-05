@@ -17,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -97,13 +97,13 @@ public class BarangServiceImpl extends AbstractService<BarangEntity> implements 
     }
 
     @Override
-    public Long findAllPaggingCount(AdvanceSearch params) {
+    public BigInteger findAllPaggingCount(AdvanceSearch params) {
         String param = params.getSearch()!=null ? params.getSearch() : "";
 
         String queryCount = "SELECT COUNT(*) FROM barang WHERE UPPER(nama_barang) LIKE UPPER(:param)";
         Query q = getSession().createSQLQuery(queryCount);
         q.setParameter("param","%"+ param +"%");
-        Long count = (Long) q.uniqueResult();
+        BigInteger count = (BigInteger) q.uniqueResult();
         return count;
     }
 

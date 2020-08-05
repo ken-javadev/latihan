@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +48,7 @@ public class BarangRestController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Map<String,Object> findAllPagging(@RequestBody AdvanceSearch params) {
-        Long count = barangService.findAllPaggingCount(params);
+        BigInteger count = barangService.findAllPaggingCount(params);
         List<BarangEntity> data = barangService.findAllPagging(params);
         Map<String,Object> map =new HashMap();
         map.put("total",count);
