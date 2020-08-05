@@ -119,6 +119,7 @@ public class BarangServiceImpl extends AbstractService<BarangEntity> implements 
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void delete(Integer idBarang) {
         barangJpaRepository.delete(idBarang);
     }

@@ -3,6 +3,7 @@ package com.demo.rest;
 
 import com.demo.bean.BarangEntity;
 import com.demo.common.AdvanceSearch;
+import com.demo.common.JsonResponse;
 import com.demo.service.BarangService;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -38,8 +39,13 @@ public class BarangRestController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public List<BarangEntity> findAll() {
-        return (List<BarangEntity>) barangService.findAll();
+    public JsonResponse findAll() {
+        List<BarangEntity> data= barangService.findAll();
+
+        JsonResponse response =new JsonResponse();
+        response.setResult(data);
+        response.setStatus(true);
+        return response;
     }
 
     @RequestMapping(value = "/barang-list-pagging",
@@ -47,13 +53,17 @@ public class BarangRestController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public Map<String,Object> findAllPagging(@RequestBody AdvanceSearch params) {
+    public JsonResponse findAllPagging(@RequestBody AdvanceSearch params) {
         BigInteger count = barangService.findAllPaggingCount(params);
         List<BarangEntity> data = barangService.findAllPagging(params);
         Map<String,Object> map =new HashMap();
         map.put("total",count);
         map.put("rows", data);
-        return map;
+
+        JsonResponse response =new JsonResponse();
+        response.setResult(map);
+        response.setStatus(true);
+        return response;
     }
 
     @RequestMapping(value = "/barang-by-id/{idBarang}",
@@ -61,8 +71,12 @@ public class BarangRestController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public BarangEntity findOne(@PathVariable("idBarang") Integer idBarang) {
-        return barangService.findOne(idBarang);
+    public JsonResponse findOne(@PathVariable("idBarang") Integer idBarang) {
+        BarangEntity barangEntity = barangService.findOne(idBarang);
+        JsonResponse response =new JsonResponse();
+        response.setResult(barangEntity);
+        response.setStatus(true);
+        return response;
     }
 
     @RequestMapping(value = "/barang-save",
@@ -70,17 +84,25 @@ public class BarangRestController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public void create(@RequestBody BarangEntity barang) {
+    public JsonResponse create(@RequestBody BarangEntity barang) {
         barangService.save(barang);
+        JsonResponse response =new JsonResponse();
+        response.setResult("SUKSES");
+        response.setStatus(true);
+        return response;
     }
 
-    @RequestMapping(value = "/barang-update/{idBarang}",
+    @RequestMapping(value = "/barang-update",
             method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public void update(@PathVariable("idBarang") Integer idBarang, @RequestBody BarangEntity barang) {
+    public JsonResponse update(@RequestBody BarangEntity barang) {
         barangService.save(barang);
+        JsonResponse response =new JsonResponse();
+        response.setResult("SUKSES");
+        response.setStatus(true);
+        return response;
     }
 
     @RequestMapping(value = "/barang-delete/{idBarang}",
@@ -88,8 +110,12 @@ public class BarangRestController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public void delete(@PathVariable("idBarang") Integer idBarang) {
+    public JsonResponse delete(@PathVariable("idBarang") Integer idBarang) {
         barangService.delete(idBarang);
+        JsonResponse response =new JsonResponse();
+        response.setResult("SUKSES");
+        response.setStatus(true);
+        return response;
     }
 
 
@@ -119,7 +145,6 @@ public class BarangRestController {
         Map parameters = new HashMap();
         JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, parameters, beanColDataSource);
         JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
-
 
         response.setHeader("Content-Disposition", "inline; filename=data barang.pdf;");
         response.setContentType("application/pdf");

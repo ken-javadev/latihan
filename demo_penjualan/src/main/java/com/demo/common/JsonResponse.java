@@ -1,13 +1,16 @@
 package com.demo.common;
 public class JsonResponse {
-    private String status = null;
+    private Boolean status = false;
     private Object result = null;
-    public String getStatus() {
+
+    public Boolean getStatus() {
         return status;
     }
-    public void setStatus(String status) {
+
+    public void setStatus(Boolean status) {
         this.status = status;
     }
+
     public Object getResult() {
         return result;
     }
