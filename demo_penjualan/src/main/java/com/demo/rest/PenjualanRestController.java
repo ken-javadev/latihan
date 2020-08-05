@@ -2,6 +2,7 @@
 package com.demo.rest;
 
 import com.demo.bean.PenjualanEntity;
+import com.demo.common.JsonResponse;
 import com.demo.service.PenjualanService;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,13 @@ public class PenjualanRestController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public List<PenjualanEntity> findAll() {
-		return (List<PenjualanEntity>) penjualanService.findAll();
+	public JsonResponse findAll() {
+		List<PenjualanEntity> data = penjualanService.findAll();
+
+		JsonResponse response = new JsonResponse();
+		response.setResult(data);
+		response.setStatus(true);
+		return response;
 	}
 
 	@RequestMapping( value="/penjualan-by-id/{idPenjualan}",
@@ -36,8 +42,12 @@ public class PenjualanRestController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public PenjualanEntity findOne(@PathVariable("idPenjualan") Integer idPenjualan) {
-		return penjualanService.findOne(idPenjualan);
+	public JsonResponse findOne(@PathVariable("idPenjualan") Integer idPenjualan) {
+		PenjualanEntity penjualanEntity = penjualanService.findOne(idPenjualan);
+		JsonResponse response = new JsonResponse();
+		response.setResult(penjualanEntity);
+		response.setStatus(true);
+		return response;
 	}
 	
 	@RequestMapping( value="/penjualan-save",
@@ -45,17 +55,27 @@ public class PenjualanRestController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public void create(@RequestBody PenjualanEntity penjualan) {
+	public JsonResponse create(@RequestBody PenjualanEntity penjualan) {
 		penjualanService.save(penjualan);
+
+		JsonResponse response = new JsonResponse();
+		response.setResult("SUKSES");
+		response.setStatus(true);
+		return response;
 	}
 
-	@RequestMapping( value="/penjualan-update/{idPenjualan}",
+	@RequestMapping( value="/penjualan-update",
 			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public void update(@PathVariable("idPenjualan") Integer idPenjualan, @RequestBody PenjualanEntity penjualan) {
+	public JsonResponse update(@RequestBody PenjualanEntity penjualan) {
 		penjualanService.save(penjualan);
+
+		JsonResponse response = new JsonResponse();
+		response.setResult("SUKSES");
+		response.setStatus(true);
+		return response;
 	}
 
 	@RequestMapping( value="/penjualan-delete/{idPenjualan}",
@@ -63,8 +83,13 @@ public class PenjualanRestController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public void delete(@PathVariable("idPenjualan") Integer idPenjualan) {
+	public JsonResponse delete(@PathVariable("idPenjualan") Integer idPenjualan) {
 		penjualanService.delete(idPenjualan);
+
+		JsonResponse response = new JsonResponse();
+		response.setResult("SUKSES");
+		response.setStatus(true);
+		return response;
 	}
 
 	@RequestMapping(value = "export-penjualan-excel", method = RequestMethod.GET)
