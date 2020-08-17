@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:s="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form" 
+     xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:input="urn:jsptagdir:/WEB-INF/tags/input" 
+     version="2.0">
+<jsp:directive.page contentType="text/html;charset=UTF-8"/>
+<jsp:output omit-xml-declaration="yes"/>
+
+	<div class="container">
+		<fieldset class="col-sm-12 bordure">
+			<legend class="legende"><s:message code="mahasiswa"/></legend>
+		
+			<util:message message="${message}" messages="${messages}" />
+			
+	    	<s:url value="${saveAction}" var="url_form_submit" />
+			<form:form class="form-horizontal" modelAttribute="mahasiswa" cssClass="well form-horizontal" method="POST" action="${url_form_submit}">
+				<form:errors path="*" cssClass="alert alert-danger" element="div" />
+
+				<c:if test="${mode != 'create'}">
+					<!-- Store data in hidden fields in order to be POST even if the field is disabled -->
+					<form:hidden path="id" />
+				</c:if>
+ 
+				<!-- PRIMARY KEY FIELD : id -->
+				<div class="form-group">
+					<!-- The field label is defined in the messages file (for i18n) -->
+					<label for="mahasiswa_id" class="col-sm-2 control-label"><s:message code="mahasiswa.id"/></label>
+					<div class="col-sm-10">
+						<form:input id="mahasiswa_id" path="id" class="form-control" maxLength="11" disabled="${mode != 'create'}" />
+						<form:errors id="mahasiswa_id_errors" path="id" cssClass="label label-danger" />
+
+					</div>
+				</div>
+
+ 
+				<!-- DATA FIELD : nim -->
+				<div class="form-group">
+					<!-- The field label is defined in the messages file (for i18n) -->
+					<label for="mahasiswa_nim" class="col-sm-2 control-label"><s:message code="mahasiswa.nim"/></label>
+					<div class="col-sm-10">
+  						<form:input id="mahasiswa_nim" path="nim" class="form-control" maxLength="50"  />
+						<form:errors id="mahasiswa_nim_errors" path="nim" cssClass="label label-danger" />
+
+					</div>
+				</div>
+
+ 
+				<!-- DATA FIELD : nama -->
+				<div class="form-group">
+					<!-- The field label is defined in the messages file (for i18n) -->
+					<label for="mahasiswa_nama" class="col-sm-2 control-label"><s:message code="mahasiswa.nama"/></label>
+					<div class="col-sm-10">
+  						<form:input id="mahasiswa_nama" path="nama" class="form-control" maxLength="50"  />
+						<form:errors id="mahasiswa_nama_errors" path="nama" cssClass="label label-danger" />
+
+					</div>
+				</div>
+
+ 
+				<!-- DATA FIELD : alamat -->
+				<div class="form-group">
+					<!-- The field label is defined in the messages file (for i18n) -->
+					<label for="mahasiswa_alamat" class="col-sm-2 control-label"><s:message code="mahasiswa.alamat"/></label>
+					<div class="col-sm-10">
+  						<form:textarea id="mahasiswa_alamat" path="alamat" class="form-control"  /> <!-- LONG TEXT type -->
+						<form:errors id="mahasiswa_alamat_errors" path="alamat" cssClass="label label-danger" />
+
+					</div>
+				</div>
+
+ 
+				<!-- DATA FIELD : jenisKelamin -->
+				<div class="form-group">
+					<!-- The field label is defined in the messages file (for i18n) -->
+					<label for="mahasiswa_jenisKelamin" class="col-sm-2 control-label"><s:message code="mahasiswa.jenisKelamin"/></label>
+					<div class="col-sm-10">
+  						<!--<form:input id="mahasiswa_jenisKelamin" path="jenisKelamin" class="form-control" maxLength="15"  />-->
+						<div class="form-check form-check-inline">
+							<form:radiobutton class="form-check-input" id="mahasiswa_jenisKelamin" path="jenisKelamin" value="Laki - Laki"/>
+							<label class="form-check-label" for="mahasiswa_jenisKelamin">Laki - Laki</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<form:radiobutton class="form-check-input" id="mahasiswa_jenisKelamin" path="jenisKelamin" value="Perempuan"/>
+							<label class="form-check-label" for="mahasiswa_jenisKelamin">Perempuan</label>
+						</div>
+						<form:errors id="mahasiswa_jenisKelamin_errors" path="jenisKelamin" cssClass="label label-danger" />
+
+					</div>
+				</div>
+
+ 
+				<!-- DATA FIELD : tempatLahir -->
+				<div class="form-group">
+					<!-- The field label is defined in the messages file (for i18n) -->
+					<label for="mahasiswa_tempatLahir" class="col-sm-2 control-label"><s:message code="mahasiswa.tempatLahir"/></label>
+					<div class="col-sm-10">
+  						<form:input id="mahasiswa_tempatLahir" path="tempatLahir" class="form-control" maxLength="50"  />
+						<form:errors id="mahasiswa_tempatLahir_errors" path="tempatLahir" cssClass="label label-danger" />
+
+					</div>
+				</div>
+
+ 
+				<!-- DATA FIELD : tanggalLahir -->
+				<div class="form-group">
+					<!-- The field label is defined in the messages file (for i18n) -->
+					<label for="mahasiswa_tanggalLahir" class="col-sm-2 control-label"><s:message code="mahasiswa.tanggalLahir"/></label>
+					<div class="col-sm-10">
+  						<input:date id="mahasiswa_tanggalLahir" name="tanggalLahir" />  <!-- DATE type -->
+						<form:errors id="mahasiswa_tanggalLahir_errors" path="tanggalLahir" cssClass="label label-danger" />
+
+					</div>
+				</div>
+
+ 
+				<!-- DATA FIELD : agama -->
+				<div class="form-group">
+					<!-- The field label is defined in the messages file (for i18n) -->
+					<label for="mahasiswa_agama" class="col-sm-2 control-label"><s:message code="mahasiswa.agama"/></label>
+					<div class="col-sm-10">
+						<form:select id="mahasiswa_agama" path="agama" cssClass="form-control">
+							<form:option value="">-Select-</form:option>
+							<form:option value="Islam">Islam</form:option>
+							<form:option value="Kristen">Kristen</form:option>
+							<form:option value="Katolik">Katolik</form:option>
+							<form:option value="Hindu">Hindu</form:option>
+							<form:option value="Budha">Budha</form:option>
+						</form:select>
+						<form:errors id="mahasiswa_agama_errors" path="agama" cssClass="label label-danger" />
+
+					</div>
+				</div>
+
+ 
+				<!-- DATA FIELD : statusPerkawinan -->
+				<div class="form-group">
+					<!-- The field label is defined in the messages file (for i18n) -->
+					<label for="mahasiswa_statusPerkawinan" class="col-sm-2 control-label"><s:message code="mahasiswa.statusPerkawinan"/></label>
+					<div class="col-sm-10">
+						<div class="form-check form-check-inline">
+							<form:radiobutton class="form-check-input" id="mahasiswa_statusPerkawinan" path="statusPerkawinan" value="Lajang"/>
+							<label class="form-check-label" for="mahasiswa_statusPerkawinan">Lajang</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<form:radiobutton class="form-check-input" id="mahasiswa_statusPerkawinan" path="statusPerkawinan" value="Menikah"/>
+							<label class="form-check-label" for="mahasiswa_statusPerkawinan">Menikah</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<form:radiobutton class="form-check-input" id="mahasiswa_statusPerkawinan" path="statusPerkawinan" value="Berpisah"/>
+							<label class="form-check-label" for="mahasiswa_statusPerkawinan">Berpisah</label>
+						</div>
+
+						<form:errors id="mahasiswa_statusPerkawinan_errors" path="statusPerkawinan" cssClass="label label-danger" />
+
+					</div>
+				</div>
+
+
+				<!-- ACTION BUTTONS -->
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-2">
+						<c:if test="${mode != 'create'}">
+							<!-- "DELETE" button ( HREF link ) -->
+							<s:url var="deleteButtonURL" value="/mahasiswa/delete/${mahasiswa.id}" />
+							<a role="button" class="btn btn-danger btn-block" href="${deleteButtonURL}"><s:message code="delete"/></a>
+						</c:if>
+					</div>
+    				<div class="col-sm-offset-4 col-sm-2">
+						<!-- "CANCEL" button ( HREF link ) -->
+		 				<s:url var="cancelButtonURL" value="/mahasiswa" />
+						<a role="button" class="btn btn-default btn-block" href="${cancelButtonURL}"><s:message code="cancel"/></a>
+					</div>
+    				<div class="col-sm-2">
+						<!-- "SAVE" button ( SUBMIT button ) -->
+						<button type="submit" class="btn btn-primary btn-lg btn-block"><s:message code="save"/></button>
+					</div>
+				</div>
+			</form:form>
+	    </fieldset>
+	</div>	
+</div>

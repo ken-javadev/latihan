@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:joda="http://www.joda.org/joda/time/tags" xmlns:s="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:display="urn:jsptagdir:/WEB-INF/tags/display" version="2.0">
+<jsp:directive.page contentType="text/html;charset=UTF-8"/>
+<jsp:output omit-xml-declaration="yes"/>
+	<div class="container">
+		<fieldset class="col-sm-12 bordure">
+			<legend class="legende"><s:message code="mahasiswa"/></legend>
+		
+			<util:message message="${message}" messages="${messages}" />
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th><s:message code="mahasiswa.id"/></th>
+						<th><s:message code="mahasiswa.nim"/></th>
+						<th><s:message code="mahasiswa.nama"/></th>
+						<th><s:message code="mahasiswa.alamat"/></th>
+						<th><s:message code="mahasiswa.jenisKelamin"/></th>
+						<th><s:message code="mahasiswa.tempatLahir"/></th>
+						<th><s:message code="mahasiswa.tanggalLahir"/></th>
+						<th><s:message code="mahasiswa.agama"/></th>
+						<th><s:message code="mahasiswa.statusPerkawinan"/></th>
+						<s:url var="url_create" value="/mahasiswa/form"  />
+						<th><a class="btn btn-info" href='${url_create}'><s:message code="create"/></a></th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${list}" var="mahasiswa">
+						<tr>
+							<td>${mahasiswa.id}</td>
+							<td>${mahasiswa.nim}</td>
+							<td>${mahasiswa.nama}</td>
+							<td>${mahasiswa.alamat}</td>
+							<td>${mahasiswa.jenisKelamin}</td>
+							<td>${mahasiswa.tempatLahir}</td>
+							<td><display:date value="${mahasiswa.tanggalLahir}" /></td>
+							<td>${mahasiswa.agama}</td>
+							<td>${mahasiswa.statusPerkawinan}</td>
+							<s:url var="url_update" value="/mahasiswa/form/${mahasiswa.id}"/>
+							<td><a class="btn btn-info" href="${url_update}"><s:message code="edit"/></a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</fieldset>
+	</div>
+</div>
