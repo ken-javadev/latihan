@@ -89,6 +89,7 @@ public class MahasiswaController extends AbstractController {
 				return redirectToForm(httpServletRequest, mahasiswa.getId() );
 			} else {
 				populateModel( model, mahasiswa, FormMode.CREATE);
+				messageHelper.addException(redirectAttributes, "mahasiswa.error.delete", null);
 				return JSP_FORM;
 			}
 		} catch(Exception e) {

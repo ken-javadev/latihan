@@ -23,22 +23,26 @@
 	<!-- style -->
 	<spring:url value="/css/bootstrap.min.css" var="css_url_bootstrap" />
 	<spring:url value="/css/bootstrap-theme.min.css" var="css_url_bootstrap_theme" />
+	<spring:url value="/css/bootstrap-table.min.css" var="css_url_boostrap_table" />
 	<spring:url value="/css/datepicker3.css" var="css_url_datepicker" />
 	<spring:url value="/css/styles.css" var="css_url_styles" />
 	<link href="${css_url_bootstrap}" rel="stylesheet"  type="text/css" />
 	<link href="${css_url_bootstrap_theme}" rel="stylesheet"  type="text/css" />
+	<link href="${css_url_boostrap_table}" rel="stylesheet"  type="text/css" />
 	<link href="${css_url_datepicker}" rel="stylesheet"  type="text/css" />
 	<link href="${css_url_styles}" rel="stylesheet"  type="text/css" />
 	
 	<!-- javascript -->
-	<spring:url value="/js/validation.js" var="js_url_validation" />
+	<spring:url value="/js/common-eve.js" var="js_url_validation" />
 	<spring:url value="/js/jquery-1.10.2.min.js" var="js_url_jquery" />
 	<spring:url value="/js/bootstrap.js" var="js_url_bootstrap" />
+	<spring:url value="/js/bootstrap-table.min.js" var="js_url_bootstrap_table" />
 	<spring:url value="/js/bootstrap-datepicker.js" var="js_url_bootstrap_datepicker" />
 	<spring:url value="/js/locales/bootstrap-datepicker.${fn:substring(plocale, 0, 2)}.js" var="js_url_bootstrap_datepicker_locale" />
 	<script type="text/javascript" src="${js_url_validation}"><jsp:text/></script>
 	<script type="text/javascript" src="${js_url_jquery}"><jsp:text/></script>
 	<script type="text/javascript" src="${js_url_bootstrap}"><jsp:text/></script>
+	<script type="text/javascript" src="${js_url_bootstrap_table}"><jsp:text/></script>
 	<script type="text/javascript" src="${js_url_bootstrap_datepicker}"><jsp:text/></script>
 	<script type="text/javascript" src="${js_url_bootstrap_datepicker_locale}" charset="UTF-8"><jsp:text/></script>
 

@@ -10,7 +10,8 @@
 		</h3>
       
 		<ul class="entity">
-            <li><a href="mahasiswa">Mahasiswa</a></li>
+            <li><a href="mahasiswa">Mahasiswa JSP</a></li>
+            <li><a href="/api/mahasiswa/form">Mahasiswa JQUERY</a></li>
 	    </ul>
 
     </div> <!-- /container -->

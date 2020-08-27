@@ -9,4 +9,7 @@
 	<definition extends="default" name="mahasiswa/form">
 		<put-attribute name="body" value="/WEB-INF/views/mahasiswa/mahasiswa_form.jspx" />
 	</definition>
+	<definition extends="default" name="mahasiswa_jquery_form">
+		<put-attribute name="body" value="/WEB-INF/views/mahasiswa/mahasiswa_jquery.jspx" />
+	</definition>
 </tiles-definitions>

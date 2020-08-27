@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:s="http://www.springframework.org/tags"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <div class="container">
+        <fieldset class="col-sm-12 bordure">
+            <legend class="legende"><s:message code="mahasiswa"/></legend>
+            <form id="mahasiswa" class="well form-horizontal">
+
+                <div class="form-group">
+                    <label for="mahasiswa_id" class="col-sm-2 control-label"><s:message code="mahasiswa.id"/></label>
+                    <div class="col-sm-10">
+                        <input id="mahasiswa_id" class="form-control" maxLength="11"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mahasiswa_nim" class="col-sm-2 control-label"><s:message code="mahasiswa.nim"/></label>
+                    <div class="col-sm-10">
+                        <input id="mahasiswa_nim"  class="form-control" maxLength="50" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mahasiswa_nama" class="col-sm-2 control-label"><s:message code="mahasiswa.nama"/></label>
+                    <div class="col-sm-10">
+                        <input id="mahasiswa_nama"  class="form-control" maxLength="50"  />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mahasiswa_alamat" class="col-sm-2 control-label"><s:message code="mahasiswa.alamat"/></label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" id="mahasiswa_alamat" rows="3"><jsp:text/></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><s:message code="mahasiswa.jenisKelamin"/></label>
+                    <div class="col-sm-10">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="jenisKelamin" value="Laki - Laki"/>
+                            <label class="form-check-label" >Laki - Laki</label>
+                        </div>
+                        <div class="form-check form-check-inline" id="mahasiswa_jenisKelamin">
+                            <input class="form-check-input" type="radio" name="jenisKelamin"  value="Perempuan"/>
+                            <label class="form-check-label" >Perempuan</label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mahasiswa_tempatLahir" class="col-sm-2 control-label"><s:message code="mahasiswa.tempatLahir"/></label>
+                    <div class="col-sm-10">
+                        <input id="mahasiswa_tempatLahir"  class="form-control" maxLength="50"  />
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="mahasiswa_tanggalLahir">Tanggal lahir</label>
+                    <div class="col-sm-10"><input id="mahasiswa_tanggalLahir" name="tanggalLahir" class="form-control" type="text"/>
+                        <script type="text/javascript">
+                            $('#mahasiswa_tanggalLahir').datepicker({
+                                format: 'yyyy-mm-dd',
+                                language: 'en'
+                            });
+                        </script>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mahasiswa_agama" class="col-sm-2 control-label"><s:message code="mahasiswa.agama"/></label>
+                    <div class="col-sm-10">
+                        <select id="mahasiswa_agama"  class="form-control">
+                            <option value="">-Select-</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Katolik">Katolik</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Budha">Budha</option>
+                        </select>
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><s:message code="mahasiswa.statusPerkawinan"/></label>
+                    <div class="col-sm-10">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="statusPerkawinan"   value="Lajang"/>
+                            <label class="form-check-label" >Lajang</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="statusPerkawinan"  value="Menikah"/>
+                            <label class="form-check-label" >Menikah</label>
+                        </div>
+                        <div class="form-check form-check-inline" id="mahasiswa_statusPerkawinan">
+                            <input class="form-check-input" type="radio" name="statusPerkawinan" value="Berpisah"/>
+                            <label class="form-check-label" >Berpisah</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-2">
+                        <a type="button" class="btn btn-primary btn-lg btn-block" onclick="saveSiswa(this)"><s:message code="save"/></a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a type="button" class="btn btn-default btn-lg btn-block" onclick="resetSiswa(this)">Reset</a>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                <label class="col-sm-2 control-label"><jsp:text/></label>
+                <div class="col-sm-10">
+                    <table id="tableSiswa"
+                           data-toggle="table"
+                           data-method="post"
+                           data-url="${pageContext.request.contextPath}/api/mahasiswa-list"
+                           data-content-type="application/json"
+                           data-data-type="json"
+                           data-pagination="true"
+                           data-side-pagination="client"
+                           data-search="client"
+                           data-page-size="5"
+                           class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th data-sortable="true" data-field="id">Id</th>
+                            <th data-sortable="true" data-field="nim">Nim</th>
+                            <th data-sortable="true" data-field="nama">Nama</th>
+                            <th data-sortable="true" data-field="alamat">Alamat</th>
+                            <th data-sortable="true" data-field="jenisKelamin">Jenis kelamin</th>
+                            <th data-sortable="true" data-field="tempatLahir">Tempat lahir</th>
+                            <th data-sortable="true" data-field="tanggalLahir">Tanggal lahir</th>
+                            <th data-sortable="true" data-field="agama">Agama</th>
+                            <th data-sortable="true" data-field="statusPerkawinan">Status perkawinan</th>
+                            <th data-formatter="actionFormat">Action</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                </div>
+            </form>
+        </fieldset>
+
+    </div>
+    <script type="text/javascript">
+        function actionFormat(value, row, index) {
+            return  '<div  style="width: 150px">' +
+                        '<a type="button" class="btn btn-danger" onclick="deleteSiswa(this)" title="Delete" >Delete</a>  ' +
+                        '<a type="button" class="btn btn-primary" onclick="updateSiswa(this)" title="Update">Update</a>' +
+                    '</div>';
+        }
+
+        function clearErrorMessage() {
+            $("#mahasiswa_messages").remove();
+            $('.label-danger').remove();
+        }
+
+        function deleteSiswa(obj){
+            clearErrorMessage();
+            var indexData = $(obj).closest('tr').data('index');
+            var row = $('#tableSiswa').bootstrapTable('getData')[indexData];
+
+            $.ajax({
+                url: ${pageContext.request.contextPath}"/api/mahasiswa-delete",
+                type: 'GET',
+                data: {"id":row.id},
+                dataType: 'json',
+                contentType: 'application/json',
+                async: false,
+                success:function(response) {
+                    if(response.status==1){
+                        $('#mahasiswa').before('<div id="mahasiswa_messages"><div class="alert alert-success">Saved successfully</div></div>');
+                        $('#tableSiswa').bootstrapTable('refresh');
+                    }
+                },
+                error:function(){
+                    $('#mahasiswa').before('<div id="mahasiswa_messages"><div class="alert alert-danger">Internal Server Error</div></div>');
+                }
+            });
+        }
+
+
+        function updateSiswa(obj){
+           clearErrorMessage();
+
+            var indexData = $(obj).closest('tr').data('index');
+            var row = $('#tableSiswa').bootstrapTable('getData')[indexData];
+            $('#mahasiswa_id').val(row.id);
+            $('#mahasiswa_nim').val(row.nim);
+            $('#mahasiswa_nama').val(row.nama);
+            $('#mahasiswa_alamat').val(row.alamat);
+            $('input[name=jenisKelamin][value=\''+row.jenisKelamin+'\']').prop('checked',true);
+            $('#mahasiswa_tempatLahir').val(row.tempatLahir);
+            $('#mahasiswa_tanggalLahir').val(row.tanggalLahir);
+            $('#mahasiswa_agama').val(row.agama);
+            $('input[name=statusPerkawinan][value=\''+row.statusPerkawinan+'\']').prop('checked',true);
+        }
+
+        function validateForm(mahasiswa) {
+            var result = false;
+            $.ajax({
+                url: ${pageContext.request.contextPath}"/api/mahasiswa-validate",
+                type: 'POST',
+                data: JSON.stringify(mahasiswa),
+                dataType: 'json',
+                contentType: 'application/json',
+                async: false,
+                success: function (response) {
+                    if (response.status == 1) {
+                        result = true;
+                        $.each(response.messageField, function (key, value) {
+                            $('#' + key + '').after('<span class="label label-danger">' + value + '</span>');
+                        });
+                    }
+                },
+                error: function () {
+                    result = false;
+                    $('#mahasiswa').before('<div id="mahasiswa_messages"><div class="alert alert-danger">Internal Server Error</div></div>');
+                }
+            });
+            return result;
+        }
+
+        function saveSiswa(obj){
+            clearErrorMessage();
+
+            var mahasiswa = {
+                "id":  $('#mahasiswa_id').val(),
+                "nim":  $('#mahasiswa_nim').val(),
+                "nama":  $('#mahasiswa_nama').val(),
+                "alamat":  $('#mahasiswa_alamat').val(),
+                "jenisKelamin":  $('input[name=jenisKelamin]:checked').val(),
+                "tempatLahir":  $('#mahasiswa_tempatLahir').val(),
+                "tanggalLahir":  $('#mahasiswa_tanggalLahir').val(),
+                "agama":  $('#mahasiswa_agama').val(),
+                "statusPerkawinan":  $('input[name=statusPerkawinan]:checked').val()
+            };
+
+            var validate = validateForm(mahasiswa);
+
+            if(validate==false){
+                $.ajax({
+                    url: ${pageContext.request.contextPath}"/api/mahasiswa-save",
+                    type: 'POST',
+                    data: JSON.stringify(mahasiswa),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    async: false,
+                    success:function(response) {
+                        if(response.status==1){
+                            $('#mahasiswa').before('<div id="mahasiswa_messages"><div class="alert alert-success">Saved successfully</div></div>');
+                            resetSiswa(obj);
+                            $('#tableSiswa').bootstrapTable('refresh');
+                        }
+                    },
+                    error:function(){
+                        $('#mahasiswa').before('<div id="mahasiswa_messages"><div class="alert alert-danger">Internal Server Error</div></div>');
+                    }
+                });
+            }
+        }
+
+        function resetSiswa(obj){
+            $("#mahasiswa_messages").remove();
+            $('.label-danger').remove();
+
+            $('#mahasiswa_id').val('');
+            $('#mahasiswa_nim').val('');
+            $('#mahasiswa_nama').val('');
+            $('#mahasiswa_alamat').val('');
+            $('input[name=jenisKelamin]').removeAttr('checked');
+            $('#mahasiswa_tempatLahir').val('');
+            $('#mahasiswa_tanggalLahir').val('');
+            $('#mahasiswa_agama').val('');
+            $('input[name=statusPerkawinan]').removeAttr('checked');
+        }
+    </script>
+</div>
